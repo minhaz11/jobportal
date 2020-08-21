@@ -24,6 +24,11 @@ class RedirectIfAuthenticated
                     return redirect('/admin/login');
                  }
                     break;
+            case 'employer':
+                    if (Auth::guard($guard)->check()) {
+                    return redirect('/employer/login');
+                 }
+                    break;
        
             default:
                     if (Auth::guard($guard)->check()) {

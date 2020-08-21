@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Employer\Auth;
 
 use App\Admin;
+use App\Employer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -33,7 +34,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard';
+    protected $redirectTo = '/employer/dashboard';
 
     /**
      * Create a new controller instance.
@@ -42,7 +43,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:employer')->except('logout');
     }
     use RedirectsUsers, ThrottlesLogins;
 
@@ -54,11 +55,11 @@ class LoginController extends Controller
     public function showLoginForm()
 
     {
-        // $pass = bcrypt('admin');
-        // Admin::create([
-        //     'name'=>'admin',
-        //     'username'=>'admin01',
-        //     'email'=>'admin@me.com',
+        // $pass = bcrypt('12345678');
+        // Employer::create([
+        //     'company_name'=>'facebook',
+        //     'username'=>'emp01',
+        //     'email'=>'emp@mail.com',
         //     'password'=>$pass
         // ]);
         return view('employer.auth.login');
@@ -216,7 +217,7 @@ class LoginController extends Controller
 
         return $request->wantsJson()
             ? new Response('', 204)
-            : redirect('/admin/login');
+            : redirect('/employer/login');
         // return redirect()->route('admin.login')->with('success', 'Logged Out');
     }
 
@@ -238,6 +239,6 @@ class LoginController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard('employer');
     }
 }

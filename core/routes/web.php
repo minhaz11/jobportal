@@ -50,9 +50,9 @@ Route::group(['prefix'=>'employer', 'namespace'=>'Employer\Auth', 'as'=>'employe
      Route::post('login', 'LoginController@login')->name('login.dashboard');
      Route::post('logout', 'LoginController@logout')->name('logout');
      
-     //----register---//
-     // Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-     // Route::post('register', 'RegisterController@register')->name('registered');
+     
+     Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+     Route::post('register', 'RegisterController@register')->name('registered');
  
      //Forgot Password Routes
       Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -70,4 +70,9 @@ Route::group(['prefix'=>'employer', 'namespace'=>'Employer\Auth', 'as'=>'employe
  Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'as'=>'admin.','middleware'=>'auth:admin'], function(){
     
   Route::get('/dashboard','AdminController@index')->name('dashboard');
+ });
+
+ Route::group(['prefix'=>'employer', 'namespace'=>'Employer', 'as'=>'employer.','middleware'=>'auth:employer'], function(){
+    
+  Route::get('/dashboard','EmployerController@index')->name('dashboard');
  });

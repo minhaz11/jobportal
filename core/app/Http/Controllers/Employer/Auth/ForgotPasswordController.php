@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Employer\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -24,7 +24,7 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view('admin.auth.passwords.email');
+        return view('employer.auth.passwords.email');
     }
 
     /**
@@ -113,6 +113,6 @@ class ForgotPasswordController extends Controller
      */
     public function broker()
     {
-        return Password::broker('admins');
+        return Password::broker('employers');
     }
 }

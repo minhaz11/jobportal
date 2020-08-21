@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.employer.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.login.dashboard') }}">
+                    <form method="POST" action="{{ route('employer.login.dashboard') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -47,8 +47,8 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('admin.password.request') }}">
+                                @if (Route::has('employer.password.request'))
+                                    <a class="btn btn-link" href="{{ route('employer.password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
