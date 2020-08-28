@@ -5,6 +5,7 @@
 namespace App;
 
 
+use App\Job;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,6 +38,9 @@ class Employer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function jobs()
+    {
+        return $this->hasMany(Job::class,'employer_id');
+    }
    
 }

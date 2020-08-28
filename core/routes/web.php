@@ -68,8 +68,21 @@ Route::group(['prefix'=>'employer', 'namespace'=>'Employer\Auth', 'as'=>'employe
 
 
  Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'as'=>'admin.','middleware'=>'auth:admin'], function(){
-    
+ 
+    //category
   Route::get('/dashboard','AdminController@index')->name('dashboard');
+  Route::get('/category/all','CategoryController@index')->name('category.all');
+  Route::post('/category/add','CategoryController@store')->name('category.add');
+  Route::post('/category/{id}/update','CategoryController@edit')->name('category.update');
+  Route::get('/category/{id}/details','CategoryController@details')->name('category.details');
+
+  //manage joobseker
+  Route::get('/jobseeker/all','JobseekerController@index')->name('jobseeker.all');
+  Route::get('/jobseeker/{id}/disable','JobseekerController@destroy')->name('jobseeker.disable');
+  Route::get('/jobseeker/disabled/all','JobseekerController@trashed')->name('jobseeker.disabled.all');
+  Route::get('/jobseeker/restore/{id}','JobseekerController@restore')->name('jobseeker.restore');
+  Route::get('/jobseeker/delete/{id}','JobseekerController@permanentDelete')->name('jobseeker.delete');
+
  });
 
  Route::group(['prefix'=>'employer', 'namespace'=>'Employer', 'as'=>'employer.','middleware'=>'auth:employer'], function(){

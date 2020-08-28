@@ -7,11 +7,14 @@ use App\Company;
 use App\Profile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+    protected $table = 'jobseekers';
 
     /**
      * The attributes that are mass assignable.
@@ -44,9 +47,6 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
     
-    public function company(){
-        return $this->hasOne(Company::class);
-    }
     public function favorites(){
         return $this->belongsToMany(Job::class,'favourites','user_id','job_id')->withTimeStamps();
     }
