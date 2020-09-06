@@ -229,9 +229,27 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item ">
-              <a href="{{route('admin.jobseeker.all')}}" class="nav-link {{Request::is('admin/jobseeker/all')? 'active':''}}">
+              <a href="{{route('admin.employer.all')}}" class="nav-link {{Request::is('admin/employer/all')? 'active':''}}">
                   <i class="fas fa-industry text-danger"></i>
                   <p>All Employers</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+          <li class="nav-item has-treeview {{Request::is('admin/jobs/all')? 'menu-open':''}}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>
+             Manage Jobs
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="{{route('admin.job.all')}}" class="nav-link {{Request::is('admin/jobs/all')? 'active':''}}">
+                <i class="nav-icon fas fa-user-md"></i>
+                  <p>All jobs</p>
                 </a>
               </li>
             

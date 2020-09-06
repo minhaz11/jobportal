@@ -10,12 +10,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>All trashed Jobseekers</h1>
+              <h1>All Employer</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active">jobseekers</li>
+                <li class="breadcrumb-item active">employers</li>
               </ol>
             </div>
           </div>
@@ -27,8 +27,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Trashed</h3>
-              {{-- <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"data-target="#add"><i class="fas fa-plus"></i> Add new</button> --}}
+              <h3 class="card-title">Employers</h3>
+               <a href="{{route('admin.employer.trashed.all')}}" class="btn btn-danger btn-sm float-right"> trashed</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -37,21 +37,22 @@
                       <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Joined at</th>
+                        <th scope="col">Website</th>
+                        <th scope="col">Address</th>
                         <th scope="col" style="width:15%">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $user)
+                        @forelse ($employers as $employer)
                         <tr>
-                        <td  class="text-primary">{{$user->name}}</td>
-                        <td><h5 class="">{{$user->email}}</h5></td>
-                        <td>{{\Carbon\Carbon::parse($user->created_at)->format('d M Y')}}</td>
+                        <td  class="text-primary">{{$employer->company_name}}</td>
+                        <td><h5 class="">{{$employer->email}}</h5></td>
+                        <td>{{$employer->website}}</td>
+                        <td>{{$employer->address}}</td>
                           <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                               
-                            <a href="{{route('admin.jobseeker.restore',['id'=>$user->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-restore-alt"></i></a>
-                            <a href="{{route('admin.jobseeker.destroy',['id'=>$user->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-trash-alt"></i></a>
+                                <a href="" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+                            <a href="{{route('admin.employer.disable',['id'=>$employer->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-trash-alt"></i></a>
                               </div>
                           </td>
                         </tr>
@@ -67,7 +68,7 @@
             <!-- /.card-body -->
             <div class="card-footer clearfix">
               <ul class="pagination pagination-sm m-0 float-right">
-                {{$users->links()}}
+                {{$employers->links()}}
               </ul>
             </div>
         

@@ -28,7 +28,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Jobseekers</h3>
-              {{-- <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"data-target="#add"><i class="fas fa-plus"></i> Add new</button> --}}
+            <a href="{{route('admin.jobseeker.trashed.all')}}" class="btn btn-danger btn-sm float-right">Trashed Users</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

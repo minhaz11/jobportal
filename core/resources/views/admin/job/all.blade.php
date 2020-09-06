@@ -10,12 +10,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>All trashed Jobseekers</h1>
+              <h1>All Jobs</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active">jobseekers</li>
+                <li class="breadcrumb-item active">jobs</li>
               </ol>
             </div>
           </div>
@@ -27,31 +27,34 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Trashed</h3>
-              {{-- <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"data-target="#add"><i class="fas fa-plus"></i> Add new</button> --}}
+              <h3 class="card-title">Jobs</h3>
+               <a href="{{route('admin.employer.trashed.all')}}" class="btn btn-danger btn-sm float-right"> trashed</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead class="thead-light">
                       <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Joined at</th>
-                        <th scope="col" style="width:15%">Action</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Employer</th>
+                        <th scope="col" style="width:10%">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $user)
+                        @forelse ($jobs as $job)
                         <tr>
-                        <td  class="text-primary">{{$user->name}}</td>
-                        <td><h5 class="">{{$user->email}}</h5></td>
-                        <td>{{\Carbon\Carbon::parse($user->created_at)->format('d M Y')}}</td>
+                        <td  class="text-primary">{{$job->title}}</td>
+                        <td><h5 class="">{{$job->position}}</h5></td>
+                        <td>{{$job->category->name}}</td>
+                        <td>{{$job->type}}</td>
+                        <td>{{$job->employer->company_name}}</td>
                           <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                               
-                            <a href="{{route('admin.jobseeker.restore',['id'=>$user->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-restore-alt"></i></a>
-                            <a href="{{route('admin.jobseeker.destroy',['id'=>$user->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-trash-alt"></i></a>
+                                <a href="" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+                            <a href="{{route('admin.employer.disable',['id'=>$job->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-trash-alt"></i></a>
                               </div>
                           </td>
                         </tr>
@@ -67,7 +70,7 @@
             <!-- /.card-body -->
             <div class="card-footer clearfix">
               <ul class="pagination pagination-sm m-0 float-right">
-                {{$users->links()}}
+                {{$jobs->links()}}
               </ul>
             </div>
         

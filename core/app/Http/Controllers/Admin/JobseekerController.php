@@ -23,8 +23,8 @@ class JobseekerController extends Controller
  
     public function trashed()
     {
-     $trashed = User::onlyTrashed()->paginate(15);
-     return view('admin.jobseeker.trashed',compact('trashed'));
+     $users = User::onlyTrashed()->paginate(15);
+     return view('admin.jobseeker.trashed',compact('users'));
     }
  
     public function permanentDelete($id)

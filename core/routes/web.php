@@ -78,10 +78,22 @@ Route::group(['prefix'=>'employer', 'namespace'=>'Employer\Auth', 'as'=>'employe
 
   //manage joobseker
   Route::get('/jobseeker/all','JobseekerController@index')->name('jobseeker.all');
-  Route::get('/jobseeker/{id}/disable','JobseekerController@destroy')->name('jobseeker.disable');
-  Route::get('/jobseeker/disabled/all','JobseekerController@trashed')->name('jobseeker.disabled.all');
+  Route::get('/jobseeker/trashed/all','JobseekerController@trashed')->name('jobseeker.trashed.all');
+  Route::get('/jobseeker/destroy/{id}','JobseekerController@permanentDelete')->name('jobseeker.destroy');
   Route::get('/jobseeker/restore/{id}','JobseekerController@restore')->name('jobseeker.restore');
+  Route::get('/jobseeker/{id}/disable','JobseekerController@destroy')->name('jobseeker.disable');
   Route::get('/jobseeker/delete/{id}','JobseekerController@permanentDelete')->name('jobseeker.delete');
+
+  //manage employer
+  
+  Route::get('/employer/all','EmployerController@index')->name('employer.all');
+  Route::get('/employer/{id}/disable','EmployerController@destroy')->name('employer.disable');
+  Route::get('/employer/trashed/all','EmployerController@trashed')->name('employer.trashed.all');
+  Route::get('/employer/destroy/{id}','EmployerController@permanentDelete')->name('employer.destroy');
+  Route::get('/employer/restore/{id}','EmployerController@restore')->name('employer.restore');
+
+//manage jobs
+Route::get('/jobs/all','JobController@index')->name('job.all');
 
  });
 
