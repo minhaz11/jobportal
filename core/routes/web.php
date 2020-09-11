@@ -106,4 +106,6 @@ Route::group(['prefix' => 'employer', 'namespace' => 'Employer', 'as' => 'employ
 
 Route::group(['namespace' => 'JobSeeker', 'as' => 'jobseeker.', 'middleware' => 'auth:web'], function () {
     Route::get('profile', 'HomeController@index')->name('profile');
+    Route::post('profile/update/{id}', 'HomeController@profileUpdate')->name('profile.update');
+    Route::post('profile/update/image/{id}', 'HomeController@updateProfileImage')->name('profile.image.update');
 });
