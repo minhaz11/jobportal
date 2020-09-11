@@ -93,11 +93,21 @@ Route::group(['prefix'=>'employer', 'namespace'=>'Employer\Auth', 'as'=>'employe
   Route::get('/employer/restore/{id}','EmployerController@restore')->name('employer.restore');
 
 //manage jobs
-Route::get('/jobs/all','JobController@index')->name('job.all');
+Route::get('/job/all','JobController@index')->name('job.all');
+
 
  });
 
  Route::group(['prefix'=>'employer', 'namespace'=>'Employer', 'as'=>'employer.','middleware'=>'auth:employer'], function(){
     
   Route::get('/dashboard','EmployerController@index')->name('dashboard');
+
+  //mange jobs
+  Route::get('/all/jobs','JobController@index')->name('job.all');
+  Route::get('/job/add','JobController@add')->name('job.add');
+  Route::post('/job/store','JobController@store')->name('job.store');
+  Route::get('/job/edit/{id}','JobController@edit')->name('job.edit');
+  Route::post('/job/update/{id}','JobController@update')->name('job.update');
+  Route::post('/job/details/{id}','JobController@details')->name('job.details');
+
  });

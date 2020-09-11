@@ -261,9 +261,14 @@
           }
         }
       </script>
-  
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&libraries=places&callback=initAutocomplete"
           async defer></script>
+          <script type="text/javascript">
+            $(document).ready(function() {
+               $('.ckeditor').ckeditor();
+            });
+        </script>
   
     </body>
   </html>

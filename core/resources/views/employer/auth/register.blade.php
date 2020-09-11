@@ -1,4 +1,4 @@
-@extends('layouts.employer.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -87,4 +87,115 @@
         </div>
     </div>
 </div>
+@endsection --}}
+
+@extends('layouts.frontend.frontend')
+
+@section('title')
+    Employer register
+@endsection
+
+@section('content')
+<div class="row justify-content-center">
+
+ <div class="col-md-12 col-lg-8 mb-2">     
+        <h2 class="text-center mt-3">Employer Register</h2>
+    <form action="{{route('employer.registered')}}" method="POST" class="p-3 bg-white" enctype="multipart/form-data">
+         @csrf
+         <div class="row">
+            <div class="col-lg-6 col-md-6"> 
+                <div class="row form-group">
+               <div class="col-md-12 mb-2 mb-md-0">
+                 <label class="font-weight-bold" for="fullname">Company Name</label>
+               <input type="text" id="fullname" name="cname" class="form-control" placeholder="company name" required value="{{old('cname')}}">
+               </div>
+             </div>
+       
+             <div class="row form-group mb-2">
+               <div class="col-md-12 mb-3 mb-md-0">
+                 <label class="font-weight-bold" for="fullname">Username</label>
+                 <input type="text" name="username"  class="form-control" placeholder="username" required value="{{old('username')}}">
+               </div>
+             </div>
+             <div class="row form-group mb-2">
+               <div class="col-md-12 mb-3 mb-md-0">
+                 <label class="font-weight-bold" for="fullname">email</label>
+                 <input type="email" name="email"  class="form-control" placeholder="email" required value="{{old('email')}}">
+               </div>
+             </div>
+             <div class="row form-group mb-2">
+               <div class="col-md-12 mb-3 mb-md-0">
+                 <label class="font-weight-bold" for="fullname">address</label>
+                 <input type="text" name="address"  class="form-control" placeholder="address" required value="{{old('address')}}">
+               </div>
+             </div>
+             <div class="row form-group mb-2">
+               <div class="col-md-12 mb-3 mb-md-0">
+                 <label class="font-weight-bold" for="fullname">Phone</label>
+                 <input type="text" name="phone"  class="form-control" placeholder="phone" required value="{{old('phone')}}">
+               </div>
+             </div>
+             <div class="row form-group mb-2">
+               <div class="col-md-12 mb-3 mb-md-0">
+                 <label class="font-weight-bold" for="fullname">Website</label>
+                 <input type="text" name="website"  class="form-control" placeholder="website" required value="{{old('website')}}">
+               </div>
+             </div>
+             <div class="row form-group mb-2">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="font-weight-bold" for="fullname">Password</label>
+                  <input type="password" name="password"  class="form-control" placeholder="password" required >
+                </div>
+              </div>
+              <div class="row form-group mb-2">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="font-weight-bold" for="fullname">Confirm Password</label>
+                  <input type="password" name="password_confirmation"  class="form-control" placeholder="confirm password" required >
+                </div>
+              </div>
+             
+           </div>
+
+
+            <div class="col-lg-6 col-md-6">
+                <div class="row form-group mb-2">
+                    <div class="col-md-12 mb-3 mb-md-0">
+                      <label class="font-weight-bold" for="fullname">Slogan</label>
+                      <input type="text" name="slogan"  class="form-control" placeholder="slogan" required value="{{old('slogan')}}">
+                    </div>
+                  </div>
+                 <div class="row form-group mb-2">
+                   <div class="col-md-12 mb-3 mb-md-0">
+                     <label class="font-weight-bold" for="fullname">Description</label>
+                     <textarea  name="description"  class="form-control ckeditor" placeholder= "company description" required >{{old('description')}}</textarea>
+                   </div>
+                 </div>
+               
+                 <div class="row form-group mb-4">
+                   <div class="col-md-12 mb-3 mb-md-0">
+                     <label class="font-weight-bold" for="fullname">Logo</label>
+                     <input type="file" name="logo"  class="form-control"  required >
+                   </div>
+                 </div>
+                 <div class="row form-group mb-5">
+                   <div class="col-md-12 mb-3 mb-md-0">
+                     <label class="font-weight-bold" for="fullname">Cover photo</label>
+                     <input type="file" name="cover"  class="form-control"  required >
+                   </div>
+                 </div>
+            </div>
+            
+         </div>
+    
+          <div class="row form-group mt-4">
+            <div class="col-md-12">
+              <input type="submit" value="Register" class="btn btn-primary  py-2 px-5 w-100">
+            </div>
+          </div>
+    
+    
+        </form>
+      </div>
+</div>
+
 @endsection

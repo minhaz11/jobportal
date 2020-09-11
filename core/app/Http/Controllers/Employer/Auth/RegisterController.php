@@ -15,7 +15,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Image;
 class RegisterController extends Controller
 {
     use RedirectsUsers;
@@ -58,10 +58,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'cname' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:employers'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'address' => ['required', 'string'],
+            'phone' => ['required', 'numeric'],
+            'website' => ['required', 'string'],
+            'slogan' => ['required', 'string'],
+            'description' => ['required', 'string', 'max:400'],
+            'logo' => ['image', 'max:2048 '],
+            'cover' => ['image', 'max:4096 '],
         ]);
     }
 
@@ -73,12 +80,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Employer::create([
-            'company_name' => $data['name'],
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+       
+        $employer = new Employer ();
+        $employer->company_name = $data['cname'];
+        $employer->username = $data['username'];
+        $employer->email = $data['email'];
+        $employer->address = $data['address'];
+        $employer->phone = $data['phone'];
+        $employer->website = $data['website'];
+        $employer->slogan = $data['slogan'];
+        $employer->description = $data['description'];
+        $employer->password = Hash::make($data['password']);
+        if($data['logo']){
+           $name = $data['cname'].'.'.$data['logo']->extension();
+           $path = 'assets/employer/images';
+           $img = Image::make($data['logo']);
+           $img->save( $path.'/'.$name);
+           $employer->logo = $name;
+        }
+        if($data['cover']){
+           $cover_name = $data['cname'].rand(2,500).'.'.$data['logo']->extension();
+           $path = 'assets/employer/images';
+           $img = Image::make($data['cover']);
+           $img->save( $path.'/'.$cover_name);
+           $employer->cover_photo = $cover_name;
+        }
+        $employer->save();
+        return $employer;
     }
    
 
@@ -109,10 +137,11 @@ class RegisterController extends Controller
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
-
+        session()->flash('success','Registered successfully');
         return $request->wantsJson()
                     ? new Response('', 201)
                     : redirect($this->redirectPath());
+
     }
 
     /**
@@ -134,6 +163,6 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        //
+
     }
 }

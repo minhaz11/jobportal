@@ -1,11 +1,11 @@
-@extends('layouts.admin.app')
+@extends('layouts.employer.app')
 
 @section('title')
-    
+    all jobs
 @endsection
 
 @section('content')
-<div class="content-wrapper">
+
     <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -40,7 +40,8 @@
                         <th scope="col">Category</th>
                         <th scope="col">Type</th>
                         <th scope="col">Salary</th>
-                        <th scope="col">Employer</th>
+                      
+                        <th scope="col">Total Applicants</th>
                         <th scope="col" style="width:10%">Action</th>
                       </tr>
                     </thead>
@@ -52,11 +53,12 @@
                         <td>{{$job->category->name}}</td>
                         <td>{{$job->type}}</td>
                         <td>{{$job->salary}}</td>
-                        <td>{{$job->employer->company_name}}</td>
+                     
+                        <td><a href="">{{$job->users->count()}}</a></td>
                           <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
-                            <a href="{{route('admin.employer.disable',['id'=>$job->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-trash-alt"></i></a>
+                            <a href="{{route('employer.job.edit',$job->id)}}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                            <a href="{{route('employer.job.details',['id'=>$job->id])}}" class="btn btn-danger btn-sm"><i  class="fas fa-eye"></i></a>
                               </div>
                           </td>
                         </tr>
@@ -83,5 +85,5 @@
       </div>
     </div>
 </section>
-</div>
+
 @endsection
