@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,23 +19,23 @@ class RedirectIfAuthenticated
     {
         switch ($guard) {
             case 'admin':
-                    if (Auth::guard($guard)->check()) {
+                if (Auth::guard($guard)->check()) {
                     return redirect('/admin/login');
-                 }
-                    break;
+                }
+                break;
             case 'employer':
-                    if (Auth::guard($guard)->check()) {
+                if (Auth::guard($guard)->check()) {
                     return redirect('/employer/login');
-                 }
-                    break;
-       
+                }
+                break;
+
             default:
-                    if (Auth::guard($guard)->check()) {
-                     return redirect('/home');
-                    }
-                    break;
-                 }
-            
-         return $next($request);
+                if (Auth::guard($guard)->check()) {
+                    return redirect('/profile');
+                }
+                break;
+        }
+
+        return $next($request);
     }
 }

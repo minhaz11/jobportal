@@ -3,18 +3,13 @@
 namespace App;
 
 use App\Job;
-use App\Company;
 use App\Profile;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use SoftDeletes;
-    protected $table = 'jobseekers';
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','user_type'
+        'name', 'email', 'password', 'user_type',
     ];
 
     /**4
@@ -43,15 +38,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function profile(){
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
-    
-    public function favorites(){
-        return $this->belongsToMany(Job::class,'favourites','user_id','job_id')->withTimeStamps();
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Job::class, 'favourites', 'user_id', 'job_id')->withTimeStamps();
     }
     public function jobs()
     {
-        return $this->belongsToMany(Job::class,'job_user');
+        return $this->belongsToMany(Job::class, 'job_user');
     }
 }
